@@ -1,4 +1,15 @@
 {
+  "keywords": [
+    "Serverless", "lambda", "graphql"
+  ],
+  "name": "graphql-shopping-cart",
+  "description": "A simple project to demonstrate creating a `lanbda` baseded GraphQL endpoing backed by a DynamoDB",
+  "version": "0.0.1",
+  "repository": "https://github.com/assafg/graphql-shopping-cart",
+  "license": "MIT",
+  "scripts": {
+    "prettier": "prettier --write --tab-width 4 --single-quote --print-width=120 --trailing-comma es5  '**/*.js'"
+  },
   "dependencies": {
     "apollo-server-lambda": "^1.3.4",
     "graphql": "^0.13.2",
