@@ -1,0 +1,8 @@
+{
+    "resource": "/",
+    "path": "/",
+    "httpMethod": "POST",
+    "body": {
+	    "query": "mutation {\n addItem (item: {\n userId: \"assaf\",\n id: \"item3\",\n name: \"myItem3\",\n price: 21.99\n }) {\n id\n name\n price\n }}"
+    }
+}
