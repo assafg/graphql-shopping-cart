@@ -8,5 +8,5 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 module.exports.graphqlHandler = server.graphqlLambda({ schema });
 module.exports.graphiqlHandler = server.graphiqlLambda({
-    endpointURL: 'api/query',
+    endpointURL: '/dev/api/query',
 });

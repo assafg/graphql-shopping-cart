@@ -11,6 +11,7 @@ type Item {
     id: String
     name: String
     price: Float
+    quantity: Int
 }
 type ShoppingCart {
     userId: String!

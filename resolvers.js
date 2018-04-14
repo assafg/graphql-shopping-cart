@@ -4,16 +4,19 @@ const { v1 } = require('uuid');
 const db = new DynamoDB({
     table: process.env.DYNAMODB_TABLE,
     region: process.env.AWS_REGION,
-    // endpoint: 'http://localhost:8000',
 });
 
-const es = new EventSource(db);
+const es = new EventSource(db, {
+    quantity: true,
+});
+
 module.exports = {
     Query: {
         shoppingCart: (_, args) => {
             const items = [];
-            // TODO - get items from DB
+            // get items from DB
             return es.getState(args.userId).then(state => {
+                // Arrange to fit resplose (items array) 
                 const items = Object.keys(state)
                     .filter(k => k.indexOf('item-') === 0)
                     .map(k => state[k]);
@@ -29,16 +32,18 @@ module.exports = {
         },
     },
     Mutation: {
-        addItem: (_, args) => {
+        addItem: (root, args) => {
             const item = {
                 id: args.item.id,
                 name: args.item.name,
                 price: args.item.price,
+                quantity: args.item.quantity || 1,
             };
-            //TODO - Store in DB
+            // Store as an event in the DB
             const evt = {
                 context: args.item.userId,
-                [`item-${v1()}`]: item,
+                [`item-${args.item.id}`]: item,
+                quantity: 1,
             };
             return es.onEvent(evt).then(() => item);
         },
