@@ -6,6 +6,7 @@ provider:
   region: us-east-1
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}-shopping-cart-example
+    AUTH0_SECRET: ${file(./secrets.json):AUTH0_SECRET}
 
   iamRoleStatements:
     - Effect: Allow
@@ -40,12 +41,17 @@ resources:
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
       
 functions:
+  auth:
+    handler: auth.auth
+    cors: true
+
   graphqlHandler:
     handler: handler.graphqlHandler
     events:
       - http:
           path: api/query
           method: post
+          authorizer: auth
           cors: true
   
   graphiqlHandler:

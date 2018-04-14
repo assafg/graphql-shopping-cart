@@ -16,7 +16,7 @@ module.exports = {
             const items = [];
             // get items from DB
             return es.getState(args.userId).then(state => {
-                // Arrange to fit resplose (items array) 
+                // Arrange to fit resplose (items array)
                 const items = Object.keys(state)
                     .filter(k => k.indexOf('item-') === 0)
                     .map(k => state[k]);

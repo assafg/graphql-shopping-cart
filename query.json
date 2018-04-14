@@ -1,8 +1,0 @@
-{
-    "resource": "/",
-    "path": "/",
-    "httpMethod": "POST",
-    "body": {
-	    "query": "query {\n shoppingCart (userId: \"assaf\") {\n userId\n items {\n id\n name\n price\n }}}"
-    }
-}
